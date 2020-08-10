@@ -1,3 +1,5 @@
+package 数组问题;
+
 public class Four_寻找两个正序数组的中位数 {
     public static void main(String[] args) {
         int[]nums1={1,2};
