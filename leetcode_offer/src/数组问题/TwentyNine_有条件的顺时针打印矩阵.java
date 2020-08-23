@@ -12,11 +12,12 @@ public class TwentyNine_有条件的顺时针打印矩阵 {
         String[] mn = sc.nextLine().split(" ");
         int m=Integer.parseInt(mn[0]);
         int n=Integer.parseInt(mn[1]);
-
-        int[][] matrix=new int[m][n];
-        List<String> list = spiralOrder(matrix);
-        if(list==null) System.out.println("[]");;
-        System.out.println(list.toString());
+        if(m>=10&&m<=1000&&n>=10&&n<=1000){
+            int[][] matrix=new int[m][n];
+            List<String> list = spiralOrder(matrix);
+            if(list==null) System.out.println("[]");
+            System.out.println(list.toString());
+        }
     }
 
     public static List<String> spiralOrder(int[][] matrix) {

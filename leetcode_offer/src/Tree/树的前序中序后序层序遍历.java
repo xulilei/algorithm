@@ -47,8 +47,8 @@ public class 树的前序中序后序层序遍历 {
         list.add(root.val);
         inOrderDG(root.right);
     }
-    //中序迭代遍历使用stack
-    private void inOrderDD(TreeNode root){
+    //中序迭代遍历使用stack第一遍
+    /*private void inOrderDD(TreeNode root){
         Stack<TreeNode>stack=new Stack<>();
         TreeNode cur=root;
         while (!stack.isEmpty()||cur!=null){
@@ -62,6 +62,20 @@ public class 树的前序中序后序层序遍历 {
             list.add(cur.val);
             cur=cur.right;
         }
+    }*/
+    //中序迭代遍历使用stack第二遍
+    private void inOrderDD(TreeNode root){
+        Stack<TreeNode>stack=new Stack<>();
+        TreeNode cur=root;
+        while (!stack.isEmpty()||cur!=null){
+            while (cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            cur = stack.pop();
+            list.add(cur.val);
+            cur=cur.right;
+        }
     }
 
     //后续遍历递归
@@ -72,29 +86,28 @@ public class 树的前序中序后序层序遍历 {
         list.add(root.val);
     }
 
-    //后续遍历迭代只用stack
+    //后续遍历迭代使用stack
+    //放入辅助栈的顺序为根右左，这样拿出来就是左右根
     private void postOrderDD(TreeNode root){
-        Stack<TreeNode> stack=new Stack<>();
+        Stack<TreeNode> s1=new Stack<>();
+        Stack<TreeNode> s2=new Stack<>();
         TreeNode cur=root;
-        TreeNode preRight=null;
-        while (cur!=null||!stack.isEmpty()){
-            while (cur!=null){
-                //先跑完左子节点
-                stack.push(cur);
-                cur=cur.left;
+        s1.push(cur);
+        while (!s1.isEmpty()){
+            cur=s1.pop();
+            s2.push(cur);
+            //放入S1的顺序为根左右，那么取出的顺序就是右左，放入s2的顺序就为右左，取出为左右根
+            if(cur.left!=null){
+                s1.push(cur.left);
             }
-            //验证该节点的左右子节点是否已经完成,如果右子节点未完成还需遍历右子节点
-            cur=stack.peek();
-            if(cur.right==null||cur.right==preRight){
-                //代表左右子节点已经遍历完了
-                stack.pop();
-                list.add(cur.val);
-                //当右子节点完成，记录一下，作为其父节点是否完成的标志
-                preRight=cur;
-                cur=null;
-            }else {
-                cur=cur.right;
+            if(cur.right!=null){
+                s1.push(cur.right);
             }
         }
+        while (!s2.isEmpty()){
+            list.add(s2.pop().val);
+        }
+
     }
 }
+
