@@ -10,7 +10,7 @@ package 归并排序;
 
 public class mergeSort {
     public static void mergeSort(int[]arr,int left,int right){
-        if(left>right)return;
+        if(left>=right)return;
         int mid=(left+right)/2;
         mergeSort(arr, left, mid);
         mergeSort(arr,mid+1,right);
@@ -35,7 +35,7 @@ public class mergeSort {
             temp[index++]=arr[r++];
         }
         for(int i=0;i<temp.length;i++){
-            arr[l+i]=temp[i];
+            arr[left+i]=temp[i];
         }
     }
 
