@@ -107,7 +107,6 @@ public class 树的前序中序后序层序遍历 {
         while (!s2.isEmpty()){
             list.add(s2.pop().val);
         }
-
     }
 }
 
