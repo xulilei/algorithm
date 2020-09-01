@@ -21,6 +21,5 @@ public class 七七_组合 {
                 temp.remove(temp.size()-1);
             }
         }
-
     }
 }
